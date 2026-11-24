@@ -1,0 +1,27 @@
+.editor { max-width: 1440px; margin: auto; padding: clamp(12px, 3vw, 36px); }
+.editor header { margin-bottom: 18px; }
+.editor h1 { font-size: 2rem; font-weight: 700; margin: 0; letter-spacing: -.06em; }
+.editor h2 { font-size: 1.2rem; font-weight: 700; margin: 0 0 16px; }
+.workspace { display: grid; grid-template-columns: minmax(210px, 270px) minmax(0, 1fr); gap: 16px; }
+.workspace aside, .viewport { background: #fff; border: 1px solid #d5dfd8; border-radius: 12px; }
+.workspace aside { padding: 18px; align-self: start; }
+.editor label { display: grid; gap: 5px; font-size: .9rem; margin-bottom: 12px; }
+.editor input { box-sizing: border-box; width: 100%; border: 1px solid #bdcdc2; border-radius: 6px; padding: 6px; }
+.editor input::file-selector-button { margin-right: 6px; cursor: pointer; }
+.editor button { padding: 7px 12px; border: 1px solid #bdcdc2; border-radius: 6px; cursor: pointer; background: #f6f9f7; color: inherit; }
+.editor button:disabled { opacity: .5; cursor: default; }
+.editor button[aria-pressed="true"], .editor .primary { background: #194e3d; color: white; }
+.view-toggle { display: flex; gap: 6px; }
+.editor .wall-row { display: block; margin: 6px 0; text-align: left; font-size: .85rem; }
+.editor [role="status"] { margin: 12px 0 0; }
+.editor [role="alert"] { color: #942e24; }
+.viewport { min-height: 380px; overflow: hidden; align-self: start; }
+.plan { display: block; width: 100%; height: auto; background: #fff; }
+.plan[data-drawing="true"] { cursor: crosshair; }
+.empty { display: grid; min-height: 380px; place-items: center; padding: 20px; text-align: center; color: #526863; }
+.scene { height: clamp(380px, 65vh, 700px); position: relative; }
+.scene-height { position: absolute; bottom: 12px; left: 12px; margin: 0; padding: 6px 10px; background: #172125; color: white; border-radius: 6px; pointer-events: none; }
+@media (max-width: 660px) { .workspace { grid-template-columns: 1fr; } }
+.editor fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+.wall-actions { display: grid; gap: 6px; margin-top: 10px; }
+.timing { font-size: .8rem; color: #526863; }
