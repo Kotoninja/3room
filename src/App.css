@@ -1,8 +1,8 @@
-.editor { max-width: 1440px; margin: auto; padding: clamp(12px, 3vw, 36px); }
+.editor { max-width: 1680px; margin: auto; padding: clamp(12px, 3vw, 36px); }
 .editor header { margin-bottom: 18px; }
 .editor h1 { font-size: 2rem; font-weight: 700; margin: 0; letter-spacing: -.06em; }
 .editor h2 { font-size: 1.2rem; font-weight: 700; margin: 0 0 16px; }
-.workspace { display: grid; grid-template-columns: minmax(210px, 270px) minmax(0, 1fr); gap: 16px; }
+.workspace { display: grid; grid-template-columns: minmax(170px, 205px) minmax(0, 1fr) minmax(195px, 250px); gap: 16px; }
 .workspace aside, .viewport { background: #fff; border: 1px solid #d5dfd8; border-radius: 12px; }
 .workspace aside { padding: 18px; align-self: start; }
 .editor label { display: grid; gap: 5px; font-size: .9rem; margin-bottom: 12px; }
@@ -17,11 +17,44 @@
 .editor [role="alert"] { color: #942e24; }
 .viewport { min-height: 380px; overflow: hidden; align-self: start; }
 .plan { display: block; width: 100%; height: auto; background: #fff; }
-.plan[data-drawing="true"] { cursor: crosshair; }
 .empty { display: grid; min-height: 380px; place-items: center; padding: 20px; text-align: center; color: #526863; }
 .scene { height: clamp(380px, 65vh, 700px); position: relative; }
 .scene-height { position: absolute; bottom: 12px; left: 12px; margin: 0; padding: 6px 10px; background: #172125; color: white; border-radius: 6px; pointer-events: none; }
-@media (max-width: 660px) { .workspace { grid-template-columns: 1fr; } }
 .editor fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
 .wall-actions { display: grid; gap: 6px; margin-top: 10px; }
 .timing { font-size: .8rem; color: #526863; }
+.editor-top { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.editor-top h1 { margin-right: auto; }
+.workspace-tools { display: grid; gap: 16px; }
+.tool-list, .plan-setup { display: grid; gap: 5px; }
+.tool-list button { text-align: left; display: flex; gap: 10px; align-items: center; }
+.tool-list span { width: 1.3rem; text-align: center; font-size: 1.1rem; }
+.plan-setup h2 { margin-bottom: 5px; }
+.plan-setup fieldset button { width: 100%; margin-bottom: 6px; }
+.property-column { min-width: 0; }
+.object-id { font-size: .82rem; overflow-wrap: anywhere; margin-bottom: 12px; }
+.properties .coordinate-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.coordinate-fields legend { font-size: .8rem; color: #526863; }
+.wall-list { padding: 8px 12px; border: 1px solid #d5dfd8; background: white; border-radius: 10px; margin-top: 10px; max-height: 230px; overflow: auto; }
+.wall-list summary { cursor: pointer; }
+.workspace-note { padding: 0 12px 8px; font-size: .86rem; }
+.workspace-note p { margin-top: 6px; }
+.workspace-note output { display: block; font-weight: 700; }
+.plan { touch-action: none; }
+.plan.tool-wall, .plan.tool-measure { cursor: crosshair; }
+.plan.tool-pan, .plan.tool-move { cursor: grab; }
+.plan.tool-pan:active, .plan.tool-move:active { cursor: grabbing; }
+.plan.tool-vertex [data-vertex] { cursor: move; }
+.plan.tool-select [data-wall], .plan.tool-delete [data-wall], .plan.tool-delete [data-vertex] { cursor: pointer; }
+.wall-dimension { fill: #194e3d; stroke: white; stroke-width: 3px; paint-order: stroke; vector-effect: non-scaling-stroke; }
+.editor-status { display: flex; gap: 8px 20px; flex-wrap: wrap; margin-top: 12px; padding: 8px 12px; border-top: 1px solid #bdcdc2; color: #344d47; font-size: .85rem; }
+@media (max-width: 912px) {
+  .workspace { grid-template-columns: minmax(145px, 175px) minmax(0, 1fr); }
+  .property-column { grid-column: 2; }
+}
+@media (max-width: 610px) {
+  .workspace { grid-template-columns: minmax(0, 1fr); }
+  .property-column { grid-column: 1; }
+  .tool-list { display: flex; flex-wrap: wrap; }
+  .view-toggle { flex-wrap: wrap; }
+}

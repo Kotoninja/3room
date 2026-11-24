@@ -23,6 +23,13 @@ The first two commands download dependencies and the pinned checkpoint. If you a
 
 Clear drawings with dark walls work best. Inspect all inferred boundaries against the underlay before using the model. Very thin lines, openings, annotations and poor scans can cause missed or extra segments. If recognition fails, calibrate the underlay and continue manually. Project persistence and published links are later tasks.
 
+## Edit and inspect
+
+- In **2D**, use **Select** to inspect a wall, **Move** to drag both ends together, and **Vertex** to drag one endpoint. Moving a shared vertex also moves the connected wall ends. Use **Wall** after calibration to draw with two clicks. Use **Delete** or the selected object's properties to remove it.
+- Edit lengths, thicknesses and coordinates in **Свойства**. Press Enter or leave the field to apply the value. **Measure** reports pixels before calibration and metres afterwards. Set the grid interval and each snap toggle in the left panel. Scroll to zoom and drag with **Pan**.
+- In **3D**, drag to orbit, scroll to zoom and right-drag or select **Pan** to move the view. **Вид сверху**, **Перспектива** and **Сброс вида** control the camera. Clicking a wall shows the same selection and properties as in 2D.
+- Use **Cmd+Z** and **Cmd+Shift+Z** for geometry history, **Delete** or **Backspace** to remove the 2D selection, and **Escape** to cancel a gesture. Importing a new plan starts a new history.
+
 ## Checks
 
 ```sh

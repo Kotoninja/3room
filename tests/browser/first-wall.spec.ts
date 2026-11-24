@@ -23,14 +23,18 @@ for (const format of ['png', 'jpeg']) {
 
     await expect(page.getByRole('alert')).toHaveText('Тестовая ошибка модели.')
     const plan = page.getByRole('img', { name: 'План этажа в 2D' })
-    const box = (await plan.boundingBox())!
-    const click = (x: number, y: number) => page.mouse.click(box.x + box.width * x, box.y + box.height * y)
+    const click = async (x: number, y: number) => {
+      await plan.scrollIntoViewIfNeeded()
+      const box = (await plan.boundingBox())!
+      await page.mouse.click(box.x + box.width * x, box.y + box.height * y)
+    }
     await click(0.25, 0.25)
     await click(0.75, 0.25)
     await page.getByLabel('Расстояние, м').fill('4')
     await page.getByRole('button', { name: 'Задать масштаб' }).click()
     await page.getByLabel('Толщина стены, м').fill('0.3')
     await page.getByLabel('Высота стен, м').fill('3.5')
+    await page.getByLabel('Высота стен, м').press('Enter')
     await click(0.25, 0.5)
     await click(0.75, 0.5)
     await expect(page.getByText('Стена 1 · 4.00 м · толщина 0.30 м')).toBeVisible()
@@ -42,6 +46,7 @@ for (const format of ['png', 'jpeg']) {
     await page.getByRole('button', { name: 'Стена 1 · 4.00 м · толщина 0.30 м' }).click()
     await page.getByLabel('Толщина стены, м').fill('0.45')
     await page.getByLabel('Высота стен, м').fill('4')
+    await page.getByLabel('Высота стен, м').press('Enter')
     await expect(scene.getByText('Высота стен 4.00 м')).toBeVisible()
     const viewport = (await canvas.boundingBox())!
     await page.mouse.move(viewport.x + viewport.width / 2, viewport.y + viewport.height / 2)
