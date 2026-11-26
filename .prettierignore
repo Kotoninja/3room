@@ -1,0 +1,7 @@
+dist/
+playwright-report/
+test-results/
+package-lock.json
+SPEC.md
+src/recognition/upstream/
+public/models/

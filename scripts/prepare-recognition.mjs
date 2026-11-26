@@ -24,4 +24,4 @@ if (!existing || !matches(existing)) {
   await mkdir(folder, { recursive: true })
   await writeFile(destination, model)
 }
-console.log('FloorPlanNet Lite INT8 is ready for offline use.')
+process.stdout.write('FloorPlanNet Lite INT8 is ready for offline use.\n')

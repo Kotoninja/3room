@@ -95,7 +95,10 @@ test(realPlan ? `opens calibrated real ONNX geometry in 3D (${basename(realPlan)
   await expect(page.getByText(/Замкнутые помещения: [1-9]/)).toBeVisible()
   const plan = page.getByRole('img', { name: 'План этажа в 2D' })
   const wallCount = await page.getByRole('button', { name: /^Стена \d+ ·/ }).count()
-  console.log(`${realPlan ? basename(realPlan) : 'controlled plan'}: ${wallCount} walls; ${await page.getByText(/^Замкнутые помещения:/).innerText()}; ${await page.getByText(/^Инференс /).innerText()}`)
+  testInfo.annotations.push({
+    type: 'recognition',
+    description: `${wallCount} walls; ${await page.getByText(/^Замкнутые помещения:/).innerText()}; ${await page.getByText(/^Инференс /).innerText()}`,
+  })
   await testInfo.attach('recognition-overlay', { body: await plan.screenshot(), contentType: 'image/png' })
   const box = (await plan.boundingBox())!
   await page.mouse.click(box.x + box.width * 0.2, box.y + box.height * 0.2)
