@@ -6,7 +6,7 @@
 
 The working tree still contains the earlier editor and FloorPlanNet prototype. The target recognition flow in SPEC §8 is scheduled for T14–T15. These commands run the current implementation on macOS.
 
-Use an arm64 Node.js release supported by Vite, such as Node 22.12 or later, and a current Chromium browser. Run these commands in the project directory:
+Use arm64 Node.js 24 and a current Chromium browser. Run these commands in the project directory:
 
 ```sh
 npm ci
@@ -35,13 +35,15 @@ Clear drawings with dark walls work best. Inspect all inferred boundaries agains
 ## Checks
 
 ```sh
-npx tsc -b
+npm run typecheck
 npm run build
 npm run lint
 npm test
 npx playwright install chromium
 npm run test:e2e
 ```
+
+The Quality workflow runs clean install, lint, type checking, unit tests and build on pushes and pull requests. To format files locally, run `npm run format`.
 
 With the checkpoint installed, the default real ONNX smoke test exercises the empty-result UI using a bare rectangle. To verify the complete recognition-to-3D flow, set `THREEROOM_TEST_PLANS=/path/first.png,/path/second.png` to clean and complex fixtures expected to produce at least one closed room. These tests block external requests and attach the inferred 2D overlays. Tests for partial results and failures also use a separate test page or deliberately unavailable weights.
 

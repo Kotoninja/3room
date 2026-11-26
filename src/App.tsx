@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useEffectEvent, useMemo, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { distance, isPositive, usePlan } from './plan'
 import type { Point } from './plan'
 import PlanCanvas from './editor/PlanCanvas'
@@ -35,13 +35,13 @@ function App({ recognitionProvider = localRecognition } = {}) {
   const [camera, setCamera] = useState<CameraView>('perspective')
   const [resetView, setResetView] = useState(0)
 
-  function chooseTool(next: Tool) {
+  const chooseTool = useCallback((next: Tool) => {
     setTool(next)
     setCalibrating(false)
     setPoints([])
     setMoving(null)
     setError('')
-  }
+  }, [])
 
   const upload = useUnderlayUpload(recognitionProvider, () => {
     setView('2D')
@@ -66,6 +66,8 @@ function App({ recognitionProvider = localRecognition } = {}) {
   const canView3D = Boolean(plan.metresPerPixel && plan.wallHeight && plan.walls.length)
   const view = requestedView === '3D' && canView3D ? '3D' : '2D'
   const waiting = upload.busy && !upload.pendingUnderlay && !plan.walls.length
+  const activeKind = active?.kind
+  const activeId = active?.id
 
   function report(success: boolean) {
     setError(success ? '' : editError)
@@ -82,35 +84,35 @@ function App({ recognitionProvider = localRecognition } = {}) {
     chooseTool('select')
   }
 
-  function history(action: 'undo' | 'redo') {
+  const history = useCallback((action: 'undo' | 'redo') => {
     chooseTool('select')
-    plan[action]()
+    usePlan.getState()[action]()
     const updated = usePlan.getState()
     if (!updated.wallHeight || !updated.walls.length) setView('2D')
-  }
+  }, [chooseTool])
 
-  const handleKey = useEffectEvent((event: KeyboardEvent) => {
-    if (event.key === 'Escape') {
-      chooseTool('select')
-      return
-    }
-    if (event.target instanceof HTMLElement && event.target.closest('input, textarea, select, [contenteditable="true"]')) return
-    if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'z') {
-      event.preventDefault()
-      history(event.shiftKey ? 'redo' : 'undo')
-    } else if (active && view === '2D' && (event.key === 'Delete' || event.key === 'Backspace')) {
-      event.preventDefault()
-      if (active.kind === 'wall') plan.removeWall(active.id)
-      else plan.removeVertex(active.id)
-      select(null)
-      chooseTool('select')
-    }
-  })
   useEffect(() => {
-    const keyboard = (event: KeyboardEvent) => handleKey(event)
+    const keyboard = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        chooseTool('select')
+        return
+      }
+      if (event.target instanceof HTMLElement && event.target.closest('input, textarea, select, [contenteditable="true"]')) return
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'z') {
+        event.preventDefault()
+        history(event.shiftKey ? 'redo' : 'undo')
+      } else if (activeId && view === '2D' && (event.key === 'Delete' || event.key === 'Backspace')) {
+        event.preventDefault()
+        const current = usePlan.getState()
+        if (activeKind === 'wall') current.removeWall(activeId)
+        else current.removeVertex(activeId)
+        select(null)
+        chooseTool('select')
+      }
+    }
     window.addEventListener('keydown', keyboard)
     return () => window.removeEventListener('keydown', keyboard)
-  }, [])
+  }, [activeId, activeKind, chooseTool, history, view])
 
   function pointPicked(point: Point) {
     if (moving) {
@@ -123,7 +125,7 @@ function App({ recognitionProvider = localRecognition } = {}) {
     }
   }
 
-  function calibrate(event: React.SubmitEvent<HTMLFormElement>) {
+  function calibrate(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (tool !== 'select' || points.length !== 2 || !plan.calibrate(points[0], points[1], Number(metres))) {
       setError('Выберите две разные точки и введите положительное расстояние.')
