@@ -1,5 +1,7 @@
 # Offline floor plan recognition
 
+> Исторический отчёт о прототипе 3room. Действующее распознавание для целевой версии описано в SPEC.md §8 и ADR 0005.
+
 Checked 24 November 2026 for 3room on Apple Silicon. The pilot candidate is FloorPlanNet Lite. It has a small, published model with synthetic training provenance and a browser build that can serve all recognition assets locally. Yytsi and CubiCasa remain comparison options for a rights-cleared noncommercial evaluation.
 
 | Candidate | Published model and outputs | Local runtime | License and provenance |

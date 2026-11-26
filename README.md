@@ -1,8 +1,10 @@
-# 3room
+# RoomForge (репозиторий 3room)
 
-3room turns a raster floor plan into an editable model of one storey. Recognition runs on the owner's device using FloorPlanNet Lite and ONNX Runtime Web WASM.
+Целевой продукт — браузерный конструктор помещений с рисованием с нуля или по подложке, 3D, сметой и экспортом. См. [спецификацию](SPEC.md), [план работ](TODO.md) и [решения](DECISIONS.md).
 
-## Start on macOS
+## Запуск текущего прототипа
+
+The working tree still contains the earlier editor and FloorPlanNet prototype. The target recognition flow in SPEC §8 is scheduled for T14–T15. These commands run the current implementation on macOS.
 
 Use an arm64 Node.js release supported by Vite, such as Node 22.12 or later, and a current Chromium browser. Run these commands in the project directory:
 

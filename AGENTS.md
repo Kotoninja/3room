@@ -1,13 +1,12 @@
+# Инструкции для работы над проектом
+
+1. Перед задачей прочитай [SPEC.md](SPEC.md) целиком и [TODO.md](TODO.md). Выполняй одну задачу T01–T25 по §16 и сверяй её критерии в локальном трекере.
+2. При изменении типов модели обнови все места использования и запиши решение в [DECISIONS.md](DECISIONS.md). При неоднозначности выбери простейшую трактовку, совместимую со SPEC, и зафиксируй её там же.
+3. Используй зависимости из §3. Код, имена файлов, идентификаторы и коммиты — на английском. Строки русского интерфейса бери из `src/i18n/ru.ts`. В коммитах исключи `any`, `@ts-ignore` и `console.log`.
+4. Чистую логику геометрии, растра, сметы и построения стен в 3D покрывай тестами без React и DOM. Правь существующий код точечно. Сохраняй регрессионное покрытие при переносе сценариев.
+5. Перед завершением запусти `npm run lint && npm run typecheck && npm test && npm run build` и применимые E2E. Используй один коммит или PR на задачу с префиксом `feat:`, `fix:`, `test:` или `chore:`. В отчёте укажи файлы, ручную проверку и допущения.
+
 ## Agent skills
 
-### Issue tracker
-
-For publishing or fetching issues and specs, see `docs/agents/issue-tracker.md`. The tracker uses local Markdown under `.scratch/`.
-
-### Triage labels
-
-For reading or applying triage status, see `docs/agents/triage-labels.md`.
-
-### Domain docs
-
-For domain vocabulary and architecture decisions, see `docs/agents/domain.md`. 3room uses a single-context layout.
+- Задачи и статусы — [локальный трекер](docs/agents/issue-tracker.md) и [словарь статусов](docs/agents/triage-labels.md).
+- Термины и архитектурные решения — [правила чтения](docs/agents/domain.md).

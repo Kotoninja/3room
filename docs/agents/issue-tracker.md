@@ -1,5 +1,7 @@
 # Issue tracker
 
+For RoomForge, use the active T01–T25 tickets from [TODO.md](../../TODO.md). Legacy IDs remain as historical records. Mark a completed implementation ticket `resolved` after verifying its acceptance criteria.
+
 Issues and specs live under `.scratch/<feature-slug>/`.
 
 - Save the feature spec as `spec.md`.

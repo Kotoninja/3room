@@ -1,5 +1,3 @@
-# Domain docs
+# Документация предметной области
 
-3room uses a single-context layout. Before exploring, read the root `GLOSSARY.md` and relevant decisions under `docs/adr/` when they exist. Continue if either is absent. Domain modeling creates these files as terms and decisions are settled.
-
-Use glossary terms in issues, proposals, hypotheses, and test names. Bring genuine vocabulary gaps to domain modeling. If a proposal conflicts with an ADR, name the ADR and explain why the decision may need reopening.
+Требования и контракты определены в [SPEC.md](../../SPEC.md). Перед работой с моделью прочитай [GLOSSARY.md](../../GLOSSARY.md), [DECISIONS.md](../../DECISIONS.md) и относящиеся к задаче ADR. Учитывай статусы ADR. При неоднозначности запиши простейшее допущение, совместимое со SPEC, в DECISIONS.md.
